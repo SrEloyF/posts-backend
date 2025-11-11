@@ -1,16 +1,28 @@
 const { Sequelize } = require('sequelize');
 const dbConfig = require('../config/config.js');
 
-// Lee el entorno actual, por defecto "development"
 const env = process.env.NODE_ENV || 'development';
-const config = dbConfig[env]; // 👈 obtiene el bloque correcto
+const config = dbConfig[env];
 
-// Crea la instancia de Sequelize usando las variables del entorno
-const sequelize = new Sequelize(config.database, config.username, config.password, {
-  host: config.host,
-  dialect: config.dialect,   // ahora sí, no undefined
-  port: config.port || 3306
-});
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    host: config.host,
+    dialect: config.dialect,
+    port: config.port || 3306,
+    dialectOptions: config.dialect
+      ? {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
+        }
+      : {},
+  }
+);
+
 
 const defineUsuario = require('./Usuario');
 const definePost = require('./Post');
