@@ -6,8 +6,8 @@ const posts = require('./posts');
 const comentarios = require('./comentarios');
 
 router.use('/auth', auth);
-router.use('/usuarios', usuarios);
+router.use('/users', usuarios);
 router.use('/posts', posts);
-router.use('/comentarios', comentarios);
+router.use('/comments', comentarios);
 
 module.exports = router;
