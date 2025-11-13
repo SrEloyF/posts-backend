@@ -33,7 +33,38 @@ async function updateProfile(req, res, next) {
   }
 }
 
+async function listUsers(req, res, next) {
+  try {
+    const usuarios = await Usuario.findAll({
+      attributes: { exclude: ['contrasena_hash'] },
+      order: [['id_usuario', 'ASC']]
+    });
+
+    res.json({ usuarios });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getUser(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const usuario = await Usuario.findByPk(id, {
+      attributes: { exclude: ['contrasena_hash'] }
+    });
+
+    if (!usuario) return res.status(404).json({ message: 'Usuario no encontrado' });
+
+    res.json({ usuario });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   getProfile,
-  updateProfile
+  updateProfile,
+  listUsers,
+  getUser
 };

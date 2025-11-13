@@ -18,7 +18,7 @@ async function listPosts(req, res, next) {
     const posts = await Post.findAll({
       include: [
         { model: Usuario, attributes: ['id_usuario', 'nombre_usuario', 'foto_perfil_url'] },
-        { model: Comentario }
+        //{ model: Comentario } el listado completo no se listará con comentarios, pues se obtendrán dinámicamente
       ],
       order: [['fecha_creacion', 'DESC']]
     });
