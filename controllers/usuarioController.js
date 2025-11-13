@@ -40,7 +40,7 @@ async function listUsers(req, res, next) {
       order: [['id_usuario', 'ASC']]
     });
 
-    res.json({ usuarios });
+    res.json(usuarios);
   } catch (err) {
     next(err);
   }
@@ -56,7 +56,7 @@ async function getUser(req, res, next) {
 
     if (!usuario) return res.status(404).json({ message: 'Usuario no encontrado' });
 
-    res.json({ usuario });
+    res.json(usuario);
   } catch (err) {
     next(err);
   }

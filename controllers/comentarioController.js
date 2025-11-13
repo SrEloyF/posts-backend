@@ -23,7 +23,7 @@ async function listComentariosByPost(req, res, next) {
       where: { id_post },
       order: [['fecha_creacion', 'ASC']]
     });
-    res.json({ comentarios });
+    res.json(comentarios);
   } catch (err) {
     next(err);
   }

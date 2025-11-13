@@ -22,7 +22,7 @@ async function listPosts(req, res, next) {
       ],
       order: [['fecha_creacion', 'DESC']]
     });
-    res.json({ posts });
+    res.json(posts);
   } catch (err) {
     next(err);
   }
@@ -38,7 +38,7 @@ async function getPost(req, res, next) {
       ]
     });
     if (!post) return res.status(404).json({ message: 'Post no encontrado' });
-    res.json({ post });
+    res.json(post);
   } catch (err) {
     next(err);
   }
